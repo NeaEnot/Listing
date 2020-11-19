@@ -40,7 +40,6 @@ namespace Listing
                 {
                     writer.WriteLine("/*" + file.FullName.Substring(configuration.GetSection("path").Value.Length) + "*/");
                     writer.WriteLine(text);
-                    writer.WriteLine("//|||||||||||||||||||||||||||||||||||||||||||||||||||");
                 }
             }
         }
