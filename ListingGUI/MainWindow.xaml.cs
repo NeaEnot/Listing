@@ -43,14 +43,22 @@ namespace ListingGUI
             {
                 List<FileInfo> files = getAllFiles(tbInput.Text);
                 List<FileInfo> operatingFiles = new List<FileInfo>();
-                foreach (string extension in tbExts.Text.Split())
+
+                if (tbExts.Text == "*")
                 {
-                    operatingFiles.AddRange(files.Where(file => file.Extension == extension).ToList());
+                    operatingFiles.AddRange(files);
+                }
+                else
+                {
+                    foreach (string extension in tbExts.Text.Split())
+                    {
+                        operatingFiles.AddRange(files.Where(file => file.Extension == extension).ToList());
+                    }
                 }
 
                 operatingFiles.Sort((f1, f2) => string.Compare(f1.FullName, f2.FullName));
 
-                using (StreamWriter writer = new StreamWriter(tbOutput.Text)) ;
+                using (StreamWriter writer = new StreamWriter(tbOutput.Text)) ; // Чистим файл, если он уже есть
 
                 foreach (FileInfo file in operatingFiles)
                 {
